@@ -5,6 +5,6 @@ require_once 'FinalFrame.php';
 require_once 'BowlingBall.php';
 require_once 'Scores.php';
 
-$scores = new Scores('81,72,x,x,9/,9-');
+$scores = new Scores($argv[1]);
 
 echo $scores->getSum();

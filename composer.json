@@ -1,0 +1,22 @@
+{
+    "name": "petercortez/refiine",
+    "description": "Technical exam",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Peter Cortez",
+            "email": "peter.cortez@cloudemployee.co.uk"
+        }
+    ],
+    "config": {
+        "platform": {
+            "php": "8.1.4"
+        }
+    },
+    "scripts": {
+        "calculate": [
+            "php ./index.php"
+        ]
+    },
+    "require": {}
+}
