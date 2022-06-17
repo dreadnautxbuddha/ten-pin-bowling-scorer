@@ -64,7 +64,9 @@ class Frame
 
         return array_sum(
             array_map(
-                function ($bowlingBall) { return $bowlingBall->getScore(); },
+                function ($bowlingBall) {
+                    return $bowlingBall->getScore();
+                },
                 $this->thrownBalls
             )
         );
@@ -79,7 +81,7 @@ class Frame
     public function isStrike(): bool
     {
         return ! empty($this->thrownBalls)
-            && strtolower($this->thrownBalls[0]->getScore()) === 'x';
+            && $this->thrownBalls[0]->isStrikeSymbol();
     }
 
     /**
@@ -92,6 +94,6 @@ class Frame
     {
         return ! empty($this->thrownBalls)
             && ! $this->isStrike()
-            && $this->thrownBalls[1]->getScore() === '/';
+            && $this->thrownBalls[1]->isSpareSymbol();
     }
 }
