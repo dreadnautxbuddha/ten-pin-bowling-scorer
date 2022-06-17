@@ -19,7 +19,7 @@ class Scores
     {
         $scores = explode(',', $scores);
         foreach ($scores as $index => $_scores) {
-            $frame = new Frame($index + 1 === count($scores));
+            $frame = $index + 1 === count($scores) ? new FinalFrame : new Frame;
 
             foreach (str_split($_scores) as $score) {
                 $ball = new BowlingBall;
@@ -47,6 +47,19 @@ class Scores
             $nextFrame = $this->frames[$index + 1] ?? new Frame;
             $nextNextFrame = $this->frames[$index + 2] ?? new Frame;
             $total += $frame->getScore();
+
+            // The "next" frames are a bit special. Since the final frame possibly
+            // consists of three (3) throws, we need to make sure that we only
+            // consider the first two (2) throws when calculating the preceding
+            // frame's score since normally, all frames only have two (2). Not doing
+            // so will skew this specific frame's value such that when we sum up the
+            // next frame's value, a third one will be unintentionally included.
+            if ($nextFrame instanceof FinalFrame) {
+                $nextFrame = $nextFrame->withoutThirdBall();
+            }
+            if ($nextNextFrame instanceof FinalFrame) {
+                $nextNextFrame = $nextNextFrame->withoutThirdBall();
+            }
 
             if ($frame->isStrike()) {
                 // Since the current frame is a strike, we're going to take the

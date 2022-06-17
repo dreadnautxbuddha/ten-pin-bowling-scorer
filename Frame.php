@@ -15,22 +15,9 @@ class Frame
     const PIN_QTY = 10;
 
     /**
-     * @var bool
-     */
-    protected bool $isFinal;
-
-    /**
      * @var \BowlingBall[]
      */
     protected array $thrownBalls = [];
-
-    /**
-     * @param bool $isFinal Determines whether this Frame is the last one in a game
-     */
-    public function __construct(bool $isFinal = false)
-    {
-        $this->isFinal = $isFinal;
-    }
 
     /**
      * Throws a bowling ball.
